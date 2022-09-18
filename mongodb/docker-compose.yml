@@ -1,0 +1,28 @@
+version: "3.6"
+
+services:
+  mongodb_server:
+    image: mongo:latest
+    container_name: mongodb_server
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=local
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      # seeding scripts
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      # named volumes
+      - mongodb:/data/db
+      - mongoconfig:/data/configdb
+    networks:
+      - mongo_net
+
+volumes:
+  mongodb:
+  mongoconfig:
+
+networks:
+  mongo_net:
+    driver: bridge
