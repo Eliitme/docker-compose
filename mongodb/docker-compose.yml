@@ -17,12 +17,12 @@ services:
       - mongodb:/data/db
       - mongoconfig:/data/configdb
     networks:
-      - mongo_net
+      - internal_network
 
 volumes:
   mongodb:
   mongoconfig:
 
 networks:
-  mongo_net:
-    driver: bridge
+  internal_network:
+    external: true

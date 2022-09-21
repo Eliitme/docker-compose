@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  redis:
+    restart: always
+    container_name: redis_service
+    image: redis:latest
+    #    environment:
+    #     REDIS_PASSWORD: "52!+^7q#-$FSrYysZb"
+    # ports:
+    #- 6379:6379
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      - internal_network
+volumes:
+  data_mongo:
+networks:
+  internal_network:
+    external: true
